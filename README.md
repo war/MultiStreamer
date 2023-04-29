@@ -4,7 +4,7 @@ planning to make a program that allows you to watch multiple streams. optimising
 will probably come up with a better name later
 
 # todo
-1. show hard coded video from local file
+1. show hard coded video from local file - done
 2. show video selected from local file (via open button)
 3. show video & audio from url
 4. show one hardcoded stream from fishtank
