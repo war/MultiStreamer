@@ -113,3 +113,14 @@ void MainWindow::updateBtnText(std::string text, QPushButton* btn)
     QString str = QString::fromStdString(text);
     btn->setText(str);
 }
+
+void MainWindow::on_volumeSlider_sliderMoved(int position)
+{
+    float volume = getSliderVal(100, position);
+    audio->setVolume(volume);
+}
+
+float MainWindow::getSliderVal(float maxSlider, float value)
+{
+    return (value / maxSlider);
+}

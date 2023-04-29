@@ -103,7 +103,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSlider" name="horizontalSlider">
+               <widget class="QSlider" name="durationSlider">
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>
@@ -151,7 +151,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSlider" name="horizontalSlider_2">
+               <widget class="QSlider" name="volumeSlider">
                 <property name="maximumSize">
                  <size>
                   <width>16777215</width>

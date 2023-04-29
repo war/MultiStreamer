@@ -27,6 +27,8 @@ private slots:
     void on_playPauseBtn_released();
     void on_stopBtn_released();
 
+    void on_volumeSlider_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
 
@@ -35,6 +37,8 @@ private:
     void playVideo();
     void stopVideo();
     void pauseVideo();
+
+    float getSliderVal(float maxSlider, float value);
 
     void updateBtnText(std::string text, QPushButton* btn);
 
