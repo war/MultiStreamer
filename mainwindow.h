@@ -2,6 +2,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "qaudiooutput.h"
+#include "qmediaplayer.h"
 #include "qpushbutton.h"
 #include <QMainWindow>
 
@@ -17,7 +19,6 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    bool playPause = true;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -28,10 +29,17 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    bool playing = false;
+
     void playVideo();
     void stopVideo();
     void pauseVideo();
+
     void updateBtnText(std::string text, QPushButton* btn);
+
+    QMediaPlayer* player = new QMediaPlayer;
+    QAudioOutput* audio = new QAudioOutput;
 };
 
 #endif // MAINWINDOW_H

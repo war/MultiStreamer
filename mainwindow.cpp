@@ -5,6 +5,9 @@
 #include "qvideowidget.h"
 #include "ui_mainwindow.h"
 
+#include <QFileDialog>
+#include <QAudioFormat>
+#include <QAudioOutput>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,22 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->setWindowTitle("FISHTANK");
 
-    QMediaPlayer* player = new QMediaPlayer;
     QVideoWidget* vw = new QVideoWidget;
-
     QVBoxLayout* layout = new QVBoxLayout();
 
-    QString path = "C:\\Users\\oui\\Videos";
-    QString file = "2023-04-27 01-06-26.mp4";
-    QUrl url = QUrl::fromLocalFile(path + "\\" + file);
-
     player->setVideoOutput(vw);
-    player->setSource(url);
+
     layout->addWidget(vw);
-
-    player->play();
-
-    qDebug() << player->playbackState();
 
     ui->vidWidget->setLayout(layout);
 }
@@ -41,19 +34,33 @@ MainWindow::~MainWindow()
 void MainWindow::on_openBtn_released()
 {
     qDebug() << "open";
-    ui->playPauseBtn->setDisabled(false);
-    ui->stopBtn->setDisabled(false);
+
+    pauseVideo();
+
+    QString openVideo = tr("Open Video");
+    QString initialDir = "./";
+    QString fileTypes = tr("Video Files (*.mp4 *.mov *.mka)");
+
+    QString dialog = QFileDialog::getOpenFileName(this, openVideo, initialDir, fileTypes);
+
+    player->setSource(dialog);
+    //player->setVolume(50);
+
+    audio->setMuted(false);
+    audio->setVolume(0.5);
+
+    player->setAudioOutput(audio);
+
+    playVideo();
 }
 
 void MainWindow::on_playPauseBtn_released()
 {
-    if (playPause){
-        playVideo();
-    } else {
+    if (playing){
         pauseVideo();
+    } else {
+        playVideo();
     }
-
-    playPause = !playPause;
 }
 
 void MainWindow::on_stopBtn_released()
@@ -65,10 +72,13 @@ void MainWindow::playVideo()
 {
     // Play video
     qDebug() << "play";
+    player->play();
 
     // After video is played
-    playPause = true;
+    playing = true;
     updateBtnText("Pause", ui->playPauseBtn);
+
+    ui->playPauseBtn->setDisabled(false);
     ui->stopBtn->setDisabled(false);
 }
 
@@ -76,9 +86,10 @@ void MainWindow::pauseVideo()
 {
     // Pause video
     qDebug() << "pause";
+    player->pause();
 
     // After video is paused
-    playPause = false;
+    playing = false;
     updateBtnText("Play", ui->playPauseBtn);
 }
 
@@ -86,12 +97,13 @@ void MainWindow::stopVideo()
 {
     // Stop video
     qDebug() << "stop";
+    player->stop();
 
     // After video is stopped
     ui->playPauseBtn->setDisabled(false);
     ui->stopBtn->setDisabled(true);
 
-    playPause = true;
+    playing = false;
 
     updateBtnText("Play", ui->playPauseBtn);
 }

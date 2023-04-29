@@ -5,7 +5,7 @@ will probably come up with a better name later
 
 # todo (not in order)
 1. show hard coded video from local file - done
-2. show video selected from local file (via open button)
+2. show video selected from local file (via open button) - done
 3. show video & audio from url
 4. show one hardcoded stream from fishtank
 5. play/pause/stop functionality
