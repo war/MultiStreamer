@@ -7,8 +7,6 @@
 #include "qpushbutton.h"
 #include <QMainWindow>
 
-
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -29,10 +27,13 @@ private slots:
 
     void on_volumeSlider_sliderMoved(int position);
 
+    void on_muteBtn_released();
+
 private:
     Ui::MainWindow *ui;
 
     bool playing = false;
+    bool muted = false;
 
     void playVideo();
     void stopVideo();

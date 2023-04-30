@@ -124,3 +124,19 @@ float MainWindow::getSliderVal(float maxSlider, float value)
 {
     return (value / maxSlider);
 }
+
+void MainWindow::on_muteBtn_released()
+{
+    if (muted)
+    {
+        ui->muteBtn->setText("Mute");
+    }
+    else
+    {
+        ui->muteBtn->setText("Un-Mute");
+    }
+
+    audio->setMuted(!muted);
+    muted = !muted;
+}
+

@@ -16,7 +16,7 @@ will probably come up with a better name later
 10. show multiple streams and update ui to fit them all in the same layout
 11. allow users to login/chat
 12. add sound slider 0% - 100% (**DONE**)
-13. add mute button
+13. add mute button (**DONE**)
 14. save layout
 15. add app icon
 
